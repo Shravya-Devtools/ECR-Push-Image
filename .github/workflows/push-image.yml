@@ -31,12 +31,22 @@ jobs:
         run: |
           docker build -t my-app .
 
-      # Step 5: Tag Docker image with full ECR repo URI
-      - name: Tag Docker image
+      # Step 5: Tag Docker image with full ECR repo URI (latest)
+      - name: Tag Docker image (latest)
         run: |
           docker tag my-app:latest 226290659955.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
 
-      # Step 6: Push Docker image to ECR repository
-      - name: Push Docker image to ECR
+      # Step 5b: Tag Docker image with version tag
+      - name: Tag Docker image (versioned)
+        run: |
+          docker tag my-app:latest 226290659955.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.1
+
+      # Step 6: Push Docker image to ECR repository (latest)
+      - name: Push Docker image to ECR (latest)
         run: |
           docker push 226290659955.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
+
+      # Step 6b: Push Docker image to ECR repository (versioned)
+      - name: Push Docker image to ECR (versioned)
+        run: |
+          docker push 226290659955.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.1
