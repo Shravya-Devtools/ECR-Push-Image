@@ -18,7 +18,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        #  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1   # Use your region explicitly here
 
       # Step 3: Login to Amazon ECR
@@ -34,9 +34,9 @@ jobs:
       # Step 5: Tag Docker image with version only
       - name: Tag Docker image (versioned)
         run: |
-          docker tag my-app:latest 226290659955.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.2
+          docker tag my-app:latest 226290659955.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.3
 
       # Step 6: Push Docker image to ECR repository (versioned only)
       - name: Push Docker image to ECR (versioned)
         run: |
-          docker push 226290659955.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.2
+          docker push 226290659955.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.3
