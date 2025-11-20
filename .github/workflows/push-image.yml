@@ -26,7 +26,7 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      # Step 4: Build Docker image locally with tag "my-app:v1.0.1"
+      # Step 4: Build Docker image locally with tag "my-app:v1.0.2"
       - name: Build Docker image
         run: |
           docker build -t my-app:latest .
@@ -34,9 +34,9 @@ jobs:
       # Step 5: Tag Docker image with version only
       - name: Tag Docker image (versioned)
         run: |
-          docker tag my-app:latest 226290659955.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.1
+          docker tag my-app:latest 226290659955.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.2
 
       # Step 6: Push Docker image to ECR repository (versioned only)
       - name: Push Docker image to ECR (versioned)
         run: |
-          docker push 226290659955.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.1
+          docker push 226290659955.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.2
