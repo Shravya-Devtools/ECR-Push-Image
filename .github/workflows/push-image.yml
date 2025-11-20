@@ -19,24 +19,24 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-region: us-east-1   # Use your region explicitly here
 
       # Step 3: Login to Amazon ECR
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      # Step 4: Build Docker image
+      # Step 4: Build Docker image locally with tag "my-app"
       - name: Build Docker image
         run: |
           docker build -t my-app .
 
-      # Step 5: Tag Docker image
+      # Step 5: Tag Docker image with full ECR repo URI
       - name: Tag Docker image
         run: |
-          docker tag my-app:latest ${{ secrets.ECR_REPOSITORY }}:latest
+          docker tag my-app:latest 226290659955.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
 
-      # Step 6: Push to ECR
+      # Step 6: Push Docker image to ECR repository
       - name: Push Docker image to ECR
         run: |
-          docker push ${{ secrets.ECR_REPOSITORY }}:latest
+          docker push 226290659955.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
