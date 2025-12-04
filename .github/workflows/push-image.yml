@@ -2,7 +2,7 @@ name: Build and Push Docker Image to ECR Repo
 
 on:
   push:
-    branches: [ "master" ]  # Runs when you push to master
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -19,24 +19,23 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1   # Use your region explicitly here
+          aws-region: us-east-1
 
       # Step 3: Login to Amazon ECR
       - name: Login to Amazon ECR
-        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      # Step 4: Build Docker image locally with tag "my-app:v1.0.3"
+      # Step 4: Build Docker image
       - name: Build Docker image
         run: |
-          docker build -t my-app:latest .
+          docker build -t new-repo:latest .
 
-      # Step 5: Tag Docker image with version only
-      - name: Tag Docker image (versioned)
+      # Step 5: Tag image for ECR
+      - name: Tag Docker image
         run: |
-          docker tag my-app:latest 226290659955.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.3
+          docker tag new-repo:latest 085230022322.dkr.ecr.us-east-1.amazonaws.com/new-repo:v1.0.0
 
-      # Step 6: Push Docker image to ECR repository (versioned only)
-      - name: Push Docker image to ECR (versioned)
+      # Step 6: Push image to ECR
+      - name: Push Docker image to ECR
         run: |
-          docker push 226290659955.dkr.ecr.us-east-1.amazonaws.com/my-app:v1.0.3
+          docker push 085230022322.dkr.ecr.us-east-1.amazonaws.com/new-repo:v1.0.0
