@@ -28,14 +28,14 @@ jobs:
       # Step 4: Build Docker image
       - name: Build Docker image
         run: |
-          docker build -t build-ecr-repo:latest .
+          docker build -t ecr-copy-image:latest .
 
       # Step 5: Tag image for ECR
       - name: Tag Docker image
         run: |
-          docker tag build-ecr-repo:latest 741846357014.dkr.ecr.us-east-1.amazonaws.com/build-ecr-repo:v2.0.0
+          docker tag ecr-copy-image:latest 741846357014.dkr.ecr.us-east-1.amazonaws.com/ecr-copy-image:v2.0.0
 
       # Step 6: Push image to ECR
       - name: Push Docker image to ECR
         run: |
-          docker push 741846357014.dkr.ecr.us-east-1.amazonaws.com/build-ecr-repo:v2.0.0
+          docker push 741846357014.dkr.ecr.us-east-1.amazonaws.com/ecr-copy-image:v2.0.0
