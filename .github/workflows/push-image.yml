@@ -33,9 +33,9 @@ jobs:
       # Step 5: Tag image for ECR
       - name: Tag Docker image
         run: |
-          docker tag ecr-copy-image:latest 085230022322.dkr.ecr.us-east-1.amazonaws.com/ecr-copy-image:v5.0.0
+          docker tag ecr-copy-image:latest 085230022322.dkr.ecr.us-east-1.amazonaws.com/ecr-copy-image:v6.0.0
 
       # Step 6: Push image to ECR
       - name: Push Docker image to ECR
         run: |
-          docker push 085230022322.dkr.ecr.us-east-1.amazonaws.com/ecr-copy-image:v5.0.0
+          docker push 085230022322.dkr.ecr.us-east-1.amazonaws.com/ecr-copy-image:v6.0.0
